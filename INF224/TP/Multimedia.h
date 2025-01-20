@@ -6,7 +6,7 @@
 
 class Multimedia
 {
-private:
+protected:
     std::string name;
     std::string pathname;
 public:
@@ -24,7 +24,7 @@ public:
 
     virtual void print(std::ostream& s) const;
 
-    void play() const; // play the multimedia object
+    virtual void play() const; // play the multimedia object
     
     virtual ~Multimedia();
 

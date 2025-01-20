@@ -3,14 +3,13 @@
 #  Exemple de Makefile
 #  Eric Lecolinet - Reda Dehak - Telecom ParisTech 2015
 #  INF224 - TP C++ - http://www.telecom-paristech.fr/~elc/inf224
-#'C:\Program Files (x86)\GnuWin32\bin\make.exe'
 #
 ##########################################
 
 #
 # Nom du programme
 #
-PROG = monProgramme
+PROG = ProgThomas
 
 #
 # Fichiers sources (NE PAS METTRE les .h ni les .o seulement les .cpp)
@@ -20,14 +19,12 @@ SOURCES = Multimedia.cpp main.cpp
 #
 # Fichiers objets (ne pas modifier sauf si l'extension n'est pas .cpp)
 #
-OBJETS = ${SOURCES:%.cpp=%.obj}
+OBJETS = ${SOURCES:%.cpp=%.o}
 
 #
 # Compilateur C++
 #
-CXX = 'C:\VisualStudio\VC\Tools\MSVC\14.42.34433\bin\Hostx86\x86\cl.exe'
-
-
+CXX = c++
 
 #
 # Options du compilateur C++
@@ -35,17 +32,18 @@ CXX = 'C:\VisualStudio\VC\Tools\MSVC\14.42.34433\bin\Hostx86\x86\cl.exe'
 #   -std=c++11 pour C++11
 # Exemple: CXXFLAGS= -std=c++11 -Wall -O -I/usr/local/qt/include
 #
-CXXFLAGS = -std=c++11 -Wall -g -I'C:\VisualStudio\Community\VC\Tools\MSVC\14.28.29333\include'
+CXXFLAGS = -std=c++11 -Wall -g -I/usr/local/include
 
 #
 # Options de l'editeur de liens
 #
 LDFLAGS = 
 
+#
 # Librairies a utiliser
 # Exemple: LDLIBS = -L/usr/local/qt/lib -lqt
 #
-LDLIBS = /LIBPATH:'C:\VisualStudio\VC\Tools\MSVC\14.28.29333\lib\x86' /LIBPATH:'C:\VisualStudio\Community\VC\Tools\MSVC\14.28.29333\lib\x64' 
+LDLIBS = 
 
 
 ##########################################
@@ -83,15 +81,15 @@ depend-${PROG}:
 # Regles implicites
 #
 
-.SUFFIXES: .cpp .cxx .c .obj
+.SUFFIXES: .cpp .cxx .c
 
-.cpp.obj:
+.cpp.o:
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
 
-.cxx.obj:
+.cxx.o:
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
 
-.c.obj:
+.c.o:
 	$(CC) -c (CFLAGS) $(INCPATH) -o $@ $<
 
 
