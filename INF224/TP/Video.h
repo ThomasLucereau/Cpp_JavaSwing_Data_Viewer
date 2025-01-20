@@ -7,7 +7,7 @@
 #include "Multimedia.h"
 
 class Video : public Multimedia {
-    private:
+    protected:
         int duration = 0;
         
     public:
