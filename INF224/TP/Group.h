@@ -5,11 +5,15 @@
 #include <string>
 #include "Multimedia.h"
 #include <list>
+#include <memory>
+
+using MultimediaPtr = std::shared_ptr<Multimedia>;
 
 
-class Group : public std::list<Multimedia*> {
+class Group : public std::list<MultimediaPtr> {
 
     private:
+
         std::string name;
 
     public:
@@ -20,16 +24,18 @@ class Group : public std::list<Multimedia*> {
             return name;
         };
 
-        void print(std::ostream& s) const {
-            s << "Group name: " << name << std::endl;
-            for (Multimedia* multimedia : *this) {
+        void print(std::ostream& s) const { 
+            s << " \n Group name: " << name << std::endl;
+            for (MultimediaPtr multimedia : *this) {
                 multimedia->print(s);
             }
+            s << "\n" << std::endl;
         };
 
         ~Group() {
-            for (Multimedia* multimedia : *this) {
-                delete multimedia;
+            for (MultimediaPtr multimedia : *this) {
+                delete &multimedia;
+                print(std::cout << "Multimedia deleted" << std::endl);
             }
         };
 };
