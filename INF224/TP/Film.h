@@ -24,9 +24,9 @@ class Film : public Video{
 
         Film& operator=(const Film& from);
 
-        int *getDurations() ;
+        const int *getDurations() const;
 
-        int getNumberChapters() ;
+        const int getNumberChapters() const;
 
         void setDurations(int *durations) ;
 
