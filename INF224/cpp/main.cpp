@@ -1,7 +1,7 @@
 //
 // main.cpp
 // Created on 21/10/2018
-#define VERSION_5
+#define VERSION_0
 
 // Q5 : le polymorphisme permet de réaliser cette boucle sans prendre en compte le type des objets
 

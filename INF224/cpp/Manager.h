@@ -20,6 +20,15 @@ class Manager {
     
         Manager(){};
 
+        std::string getMObjects() const {
+            std::string multimedia_str;
+            for (auto const& multiMO : multimedia_objects){
+                multimedia_str.append(multiMO.first + " ,");
+            }
+            return multimedia_str;
+        };
+        
+
         void addVideo(std::string name, std::string pathname, int duration){
             if (multimedia_objects.find(name) != multimedia_objects.end()){
                 std::cerr << "Error: Object with name " << name << " already exists" << std::endl;

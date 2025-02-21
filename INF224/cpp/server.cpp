@@ -4,6 +4,8 @@
 //  Eric Lecolinet - Telecom ParisTech - 2016.
 //
 
+
+
 #include <memory>
 #include <string>
 #include <iostream>
@@ -16,6 +18,11 @@
 const int PORT = 3331;
 
 
+
+/* Les commandes envoyées par le client sont différentes entre le c++ et le java.
+En l'état actuel des choses il est en effet impossible d'envoyer de mots avec 
+une requête en Java. C'est pourquoi deux main sont proposés.
+*/
 int main(int argc, char* argv[])
 {
   Manager *manager = new Manager();
@@ -50,7 +57,7 @@ int main(int argc, char* argv[])
 
       std::ostringstream result;
       manager->printMultimedia(tokens[1], result);
-      response = "Printing multimedia object " + tokens[1] + " : " + result.str();
+      response = "Printing : " + tokens[1] + " : " + result.str();
       return true;
     }
 
@@ -61,7 +68,12 @@ int main(int argc, char* argv[])
       }
 
       manager->playMultimedia(tokens[1]);
-      response = "Playing multimedia object " + tokens[1];
+      response = "Playing : " + tokens[1];
+      return true;
+    }
+
+    if (tokens[0] == "Opening") {
+      response = manager->getMObjects();
       return true;
     }
 
@@ -82,4 +94,5 @@ int main(int argc, char* argv[])
 
   return 0;
 }
+
 

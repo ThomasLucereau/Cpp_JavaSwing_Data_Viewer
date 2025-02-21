@@ -9,12 +9,12 @@
 #
 # Nom du programme (doit correspondre au fichier qui contient main())
 #
-PROG = Client.java
+PROG = Window.java
 
 #
 # Fichiers sources .java
 #
-SOURCES = MainFrame.java  Client.java CustomMenuBar.java
+SOURCES = Window.java 
 
 #
 # Compilateur Java
