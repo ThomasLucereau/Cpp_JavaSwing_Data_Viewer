@@ -13,6 +13,7 @@
 #include "tcpserver.h"
 #include "Manager.h"
 #include <vector>
+#include <algorithm>
 
 
 const int PORT = 3331;
@@ -29,6 +30,7 @@ int main(int argc, char* argv[])
 
   manager->addImage("lenna", "Lenna.png", 1920, 1080);
   manager->addImage("eddy2", "eddy.jpg", 1920, 1080);
+  manager->addVideo("shrek", "shrek.mp4", 3);
 
   // cree le TCPServer
   auto* server = 
@@ -57,7 +59,12 @@ int main(int argc, char* argv[])
 
       std::ostringstream result;
       manager->printMultimedia(tokens[1], result);
-      response = "Printing : " + tokens[1] + " : " + result.str();
+      response = result.str();
+      //remove all \n form the string
+      response.erase(std::remove(response.begin(), response.end(), '\n'), response.end());
+      response = "Printing : " + response;
+
+      std::cout << response << std::endl;
       return true;
     }
 
@@ -68,7 +75,8 @@ int main(int argc, char* argv[])
       }
 
       manager->playMultimedia(tokens[1]);
-      response = "Playing : " + tokens[1];
+      response = "Playing : " + tokens[1] ;
+      
       return true;
     }
 
@@ -77,6 +85,8 @@ int main(int argc, char* argv[])
       return true;
     }
 
+    response = "Error: Unknown command";
+    
     return true;
   });
 

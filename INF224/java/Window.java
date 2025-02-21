@@ -35,11 +35,11 @@ public class Window extends JFrame {  // on crée une classe MainFrame qui héri
             super(text);
             addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    textArea.append(text + "\n");
-                    
+                    textArea.append("Command = " + text + textField.getText() +"\n");
                     String response = send(text + textField.getText());
-                    textArea.append(response);
-                    System.out.println("Response: "+ response + "\n");
+                    textArea.append(response + "\n");
+                    
+                    
                     
 
                 }
@@ -54,7 +54,7 @@ public class Window extends JFrame {  // on crée une classe MainFrame qui héri
             addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     textArea.append("Exit \n");
-                    System.exit(0);
+                    System.exit(2);
                 }
             });
         }
@@ -90,28 +90,30 @@ public class Window extends JFrame {  // on crée une classe MainFrame qui héri
           System.err.println("Client: Couldn't reach host "+host+":"+port);
           throw e;
         }
-        
+
         try {
           input = new BufferedReader(new InputStreamReader(sock.getInputStream()));
           output = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()));
         }
         catch (java.io.IOException e) {
-          System.err.println("Client: Couldn't open input or output streams");
-          throw e;
+            textArea.setText("Client: Couldn't open input or output streams");
+            throw e;
         }
       
         String response = send("Opening");
-        textArea.append("Files managed are : " + response);
+        textArea.append("Files managed are : " + response + "\n");
         setVisible(true);
     }
     
     public String send(String request) {
         // Envoyer la requete au serveur
+        
 
       try {
         request += "\n";  // ajouter le separateur de lignes
         output.write(request, 0, request.length());
         output.flush();
+        
       }
       catch (java.io.IOException e) {
         System.err.println("Client: Couldn't send message: " + e);
@@ -144,11 +146,11 @@ public class Window extends JFrame {  // on crée une classe MainFrame qui héri
         public void actionPerformed(ActionEvent e) {
             if (getValue(Action.NAME).equals("Print")) {
                 textArea.append("Print \n");
-                send("print");
+                send("print " + textField.getText());
             }
             else if (getValue(Action.NAME).equals("Play")) {
                 textArea.append("Play \n");
-                send("play");
+                send("play " + textField.getText());
             }
             else if (getValue(Action.NAME).equals("Exit")) {
                 textArea.append("Exit");
