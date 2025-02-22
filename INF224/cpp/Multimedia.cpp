@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-Multimedia::Multimedia() : name(""), pathname("") {}
+Multimedia::Multimedia() : name(""), pathname(""){}
 
 Multimedia::Multimedia(std::string name, std::string pathname) : name(name), pathname(pathname) {}
 
@@ -31,6 +31,17 @@ void Multimedia::play() const {
     std::cout << "Playing multimedia object" << std::endl;
 }
 
+const std::string Multimedia::getClassName() const {
+    return classname;
+}
+
+void Multimedia::write(std::ostream& s) const {
+    s << name << " " << pathname << " ";
+}
+
+void Multimedia::read(std::istream& s) {
+    s >> name >> pathname;
+}
 
 Multimedia::~Multimedia() {}
 

@@ -34,6 +34,10 @@ class Film : public Video{
 
         void print(std::ostream& s) const final ;
 
+        void write(std::ostream& s) const final ;
+
+        void read(std::istream& s) final ;
+
         ~Film();
 };
 

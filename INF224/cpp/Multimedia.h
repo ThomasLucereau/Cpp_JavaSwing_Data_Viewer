@@ -16,6 +16,8 @@ class Multimedia
 protected:
     std::string name;
     std::string pathname;
+    std::string classname = "Multimedia";
+
 public:
     Multimedia();
 
@@ -32,6 +34,12 @@ public:
     virtual void print(std::ostream& s) const;
 
     virtual void play() const; // play the multimedia object
+
+    const std::string getClassName() const;
+
+    virtual void write(std::ostream& s) const;
+
+    virtual void read(std::istream& s);
     
     virtual ~Multimedia();
 

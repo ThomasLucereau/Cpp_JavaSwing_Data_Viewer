@@ -32,6 +32,10 @@ class Group : public std::list<MultimediaPtr> {
             s << "\n" << std::endl;
         };
 
+        void addMultimedia(MultimediaPtr multimedia) {
+            push_back(multimedia);
+        };
+
         void removeMultimedia(std::string name) {
             for (MultimediaPtr multimedia : *this) {
                 if (multimedia->getName() == name) {

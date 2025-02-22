@@ -5,10 +5,13 @@
 
 
 
-Film::Film() : durations(nullptr), number_chapters(0) {}
+Film::Film() : durations(nullptr), number_chapters(0) {
+    this->classname = "Film";
+}
 
 Film::Film(std::string name, std::string pathname,int duration, int *durations, int number_chapters) : Video(name, pathname,duration) {
     this->durations = new int[3];
+    this->classname = "Film";
     for (int i = 0; i < number_chapters;i++){
         this->durations[i] = durations[i];
     }
@@ -21,7 +24,7 @@ Film::Film(const Film& from) : Video(from) {
         durations[i] = from.durations[i];
     }
     number_chapters = from.number_chapters;
-}
+    }
 
 Film& Film::operator=(const Film& from) {
     if (this != &from) {
@@ -68,6 +71,24 @@ void Film::print(std::ostream& s) const {
     }
     s << std::endl;
     printf("%p", durations);
+}
+
+void Film::write(std::ostream& s) const {
+    Video::write(s);
+    s << number_chapters << " ";
+    for (int i = 0; i < number_chapters; i++) {
+        s << durations[i] << " ";
+    }
+}
+
+void Film::read(std::istream& s) {
+    Video::read(s);
+    s >> number_chapters;
+    delete [] durations;
+    durations = new int[number_chapters];
+    for (int i = 0; i < number_chapters; i++) {
+        s >> durations[i];
+    }
 }
 
 Film::~Film() {

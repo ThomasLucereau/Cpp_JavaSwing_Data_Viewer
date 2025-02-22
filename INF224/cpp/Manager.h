@@ -27,6 +27,22 @@ class Manager {
             }
             return multimedia_str;
         };
+
+        std::string getGroups() const {
+            std::string groups_str;
+            for (auto const& group : groups){
+                groups_str.append(group.first + " ,");
+            }
+            return groups_str;
+        };
+
+        std::shared_ptr<Multimedia> getMultimedia(std::string name){
+            if (multimedia_objects.find(name) == multimedia_objects.end()){
+                std::cerr << "Error: Object with name " << name << " does not exist" << std::endl;
+                return nullptr;
+            }
+            return multimedia_objects[name];
+        };
         
 
         void addVideo(std::string name, std::string pathname, int duration){
@@ -55,10 +71,12 @@ class Manager {
         };
 
         void removeMultimedia(std::string name){
-            multimedia_objects.erase(name);
+            
             for (auto group : groups){
                 group.second->removeMultimedia(name);
             }
+            multimedia_objects.erase(name);
+            groups.erase(name); // raises no error if name is not in groups
         };
 
         void playMultimedia(std::string name){

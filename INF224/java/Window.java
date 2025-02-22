@@ -17,7 +17,7 @@ public class Window extends JFrame {  // on crée une classe MainFrame qui héri
  
   private static final long serialVersionUID = 1L;
     
-  static private JTextArea textArea = new JTextArea(10, 40);
+  static private JTextArea textArea = new JTextArea(20, 80);
   private EndButton endButton = new EndButton("End");
   private CustomMenuBar customMenuBar = new CustomMenuBar();
   private JToolBar toolBar = new JToolBar();
@@ -63,10 +63,9 @@ public class Window extends JFrame {  // on crée une classe MainFrame qui héri
     public Window(String host, int port) throws UnknownHostException, IOException {
         super("Media Handler");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500, 500);
+        setSize( 800, 1200);
 
         this.client = client;
-    
         setLayout(new BorderLayout());
 
         setJMenuBar(customMenuBar);
@@ -74,8 +73,19 @@ public class Window extends JFrame {  // on crée une classe MainFrame qui héri
         toolBar.add(textField);
         toolBar.add(new TexteButton("print "));
         toolBar.add(new TexteButton("play "));
+        toolBar.add(new TexteButton("group "));
         toolBar.add(new EndButton("Exit"));
         add(toolBar, BorderLayout.NORTH);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.add(new TexteButton("remove "));
+        panel.add(new TexteButton("add "));
+        
+        add(panel, BorderLayout.EAST);
+        setPreferredSize(new Dimension(800, 600));
+        pack();
+        
 
         add(new JScrollPane(textArea), BorderLayout.CENTER); // on ajoute le textArea au centre de la fenêtre
         
@@ -145,12 +155,16 @@ public class Window extends JFrame {  // on crée une classe MainFrame qui héri
 
         public void actionPerformed(ActionEvent e) {
             if (getValue(Action.NAME).equals("Print")) {
-                textArea.append("Print \n");
-                send("print " + textField.getText());
+                textArea.append("Command = print \n");
+                String response = send("print " + textField.getText());
+                textArea.append(response + "\n");
+
             }
             else if (getValue(Action.NAME).equals("Play")) {
-                textArea.append("Play \n");
-                send("play " + textField.getText());
+                textArea.append("Command = play \n");
+                String response = send("play " + textField.getText());
+                textArea.append(response + "\n");
+                
             }
             else if (getValue(Action.NAME).equals("Exit")) {
                 textArea.append("Exit");

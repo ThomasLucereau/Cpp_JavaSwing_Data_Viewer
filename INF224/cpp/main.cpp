@@ -1,7 +1,7 @@
 //
 // main.cpp
 // Created on 21/10/2018
-#define VERSION_0
+#define VERSION_5
 
 // Q5 : le polymorphisme permet de réaliser cette boucle sans prendre en compte le type des objets
 
@@ -29,6 +29,7 @@
 #include <iostream>
 #include <memory>
 #include "Manager.h"
+#include "Serialization.h"
 
 class Mulimedia;
 class Image;
@@ -170,8 +171,10 @@ int main(int argc, const char* argv[]){
 
 #ifdef VERSION_5
 
-int main(int argc, const char* argv[]){
+// check de la sérialisation
 
+int main(int argc, const char* argv[]){
+    
 }
 
 #endif

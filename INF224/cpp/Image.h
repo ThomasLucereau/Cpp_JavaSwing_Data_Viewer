@@ -10,8 +10,13 @@ class Image : public Multimedia {
         int width = 2048;
         int height = 1024;
     public:
-        Image(): width(0),height(0) {};
-        Image(std::string name, std::string pathname, int width = 2048, int height = 1024) : Multimedia(name, pathname), width(width), height(height) {};
+        Image(): width(0),height(0) {
+            this->classname = "Image";
+        };
+        
+        Image(std::string name, std::string pathname, int width = 2048, int height = 1024) : Multimedia(name, pathname), width(width), height(height) {
+            this->classname = "Image";
+        };
         
         int getWidth() const {
             return width;
@@ -33,6 +38,16 @@ class Image : public Multimedia {
         void play() const override {
             std::string command = "imagej " + pathname + " &";
             system(command.data());
+        };
+
+        void write(std::ostream& s) const override {
+            Multimedia::write(s);
+            s << width << " " << height << " ";
+        };
+
+        void read(std::istream& s) override {
+            Multimedia::read(s);
+            s >> width >> height;
         };
 
         ~Image() {};

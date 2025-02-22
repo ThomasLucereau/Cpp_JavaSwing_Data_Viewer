@@ -7,13 +7,18 @@
 #include "Multimedia.h"
 
 class Video : public Multimedia {
+
     protected:
         int duration = 0;
         
     public:
-        Video(): duration(0) {};
+        Video(): duration(0) {
+            this->classname = "Video";
+        };
 
-        Video(std::string name, std::string pathname, int duration = 0) : Multimedia(name, pathname), duration(duration) {};
+        Video(std::string name, std::string pathname, int duration = 0) : Multimedia(name, pathname), duration(duration) {
+            this->classname = "Video";
+        };
         
         int getDuration() const {
             return duration;
@@ -30,6 +35,16 @@ class Video : public Multimedia {
         void play() const override {
             std::string command = "mpv " + pathname + " &";
             system(command.data());
+        };
+
+        void write(std::ostream& s) const override {
+            Multimedia::write(s);
+            s << duration << " ";
+        };
+
+        void read(std::istream& s) override {
+            Multimedia::read(s);
+            s >> duration;
         };
 
         ~Video() {};
